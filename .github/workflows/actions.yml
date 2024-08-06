@@ -18,14 +18,14 @@ jobs:
           distribution: 'liberica'
           java-version: '17'
 
+      - name: Build application with Maven
+        run: mvn -B clean package -DskipTests=true
+
       - name: Analyze with SonarCloud
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: mvn -B verify sonar:sonar -Dsonar.projectKey=antkorwin_github-actions -Dsonar.organization=antkorwin-github -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=$SONAR_TOKEN -Dsonar.coverage.jacoco.xmlReportPaths=./target/site/jacoco/jacoco.xml
-
-      - name: Build application with Maven
-        run: mvn -B clean package -DskipTests=true
+        run: mvn -B verify sonar:sonar -Dsonar.projectKey=pipe -Dsonar.organization=MunSunch -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=$SONAR_TOKEN -Dsonar.coverage.jacoco.xmlReportPaths=./target/site/jacoco/jacoco.xml
 
       - name: Test Coverage
         uses: codecov/codecov-action@v4

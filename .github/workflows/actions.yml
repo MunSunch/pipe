@@ -35,6 +35,7 @@ jobs:
           token: ${{ secrets.CODECOV_TOKEN }}
 
   Delivery:
+    - steps:
       - name: DockerHub Authenticate
         uses: docker/login-action@v3.3.0
         with:
